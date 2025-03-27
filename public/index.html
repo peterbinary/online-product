@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CBL Online Products</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="wrapper">
+    <header>
+      <div class="logo">
+        <h1>CBL Online Products</h1>
+      </div>
+      <div class="hamburger-menu">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+    </header>
+
+    <nav class="main-nav">
+      <ul>
+        <li><a href="index.html" class="active"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="#" id="admin-link"><i class="fas fa-user-shield"></i> Admin</a></li>
+        <li><a href="#" id="about-link"><i class="fas fa-info-circle"></i> About</a></li>
+        <li><a href="#" id="contact-link"><i class="fas fa-envelope"></i> Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="transaction-search">
+      <h2>Track Your Order</h2>
+      <div class="search-container">
+        <input type="text" id="transaction-id" placeholder="Enter Transaction ID...">
+        <button id="track-btn">Track</button>
+      </div>
+    </div>
+
+    <main>
+      <section class="product-tracking-result" id="product-tracking">
+        <!-- Product tracking result will be displayed here -->
+      </section>
+
+      <section class="products-section">
+        <h2>Available Products</h2>
+        <div class="products-container" id="products-container">
+          <div class="loading">Loading products...</div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-content">
+        <div class="company-info">
+          <h3>CBL Online Products</h3>
+          <p>Your trusted online shopping destination</p>
+        </div>
+        <div class="footer-links">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#" id="admin-link-footer">Admin</a></li>
+            <li><a href="#" id="about-link-footer">About</a></li>
+            <li><a href="#" id="contact-link-footer">Contact</a></li>
+          </ul>
+        </div>
+        <div class="contact-info">
+          <h3>Contact Us</h3>
+          <p><i class="fas fa-envelope"></i> info@cblonlineproducts.com</p>
+          <p><i class="fas fa-phone"></i> +123 456 7890</p>
+        </div>
+      </div>
+      <div class="copyright">
+        <p>&copy; 2025 CBL Online Products. All rights reserved.</p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Admin Login Modal -->
+  <div id="admin-login-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2>Admin Login</h2>
+      <form id="admin-login-form">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required>
+        </div>
+        <button type="submit" class="btn">Login</button>
+      </form>
+      <p id="login-error" class="error-message"></p>
+    </div>
+  </div>
+
+  <!-- General Modal -->
+  <div id="general-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <div id="modal-content"></div>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
+

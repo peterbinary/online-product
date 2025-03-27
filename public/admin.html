@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - CBL Online Products</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="admin-page">
+  <div class="wrapper">
+    <header>
+      <div class="logo">
+        <h1>CBL Online Products</h1>
+        <span class="admin-badge">Admin Panel</span>
+      </div>
+      <div class="hamburger-menu">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+    </header>
+
+    <nav class="main-nav">
+      <ul>
+        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="#" id="dashboard-link" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+        <li><a href="#" id="add-product-link"><i class="fas fa-plus-circle"></i> Add Product</a></li>
+        <li><a href="#" id="view-products-link"><i class="fas fa-list"></i> View Products</a></li>
+        <li><a href="#" id="logout-link"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+      </ul>
+    </nav>
+
+    <div class="admin-search">
+      <h2>Find Product</h2>
+      <div class="search-container">
+        <input type="text" id="admin-search-input" placeholder="Enter Transaction ID or Product ID...">
+        <button id="admin-search-btn">Search</button>
+      </div>
+    </div>
+
+    <main class="admin-main">
+      <section id="dashboard-section" class="admin-section active">
+        <h2>Admin Dashboard</h2>
+        <div class="dashboard-stats">
+          <div class="stat-card">
+            <i class="fas fa-box"></i>
+            <h3>Total Products</h3>
+            <p id="total-products">0</p>
+          </div>
+          <div class="stat-card">
+            <i class="fas fa-shipping-fast"></i>
+            <h3>Products Shipped</h3>
+            <p id="products-shipped">0</p>
+          </div>
+          <div class="stat-card">
+            <i class="fas fa-warehouse"></i>
+            <h3>In Stock</h3>
+            <p id="products-in-stock">0</p>
+          </div>
+        </div>
+        <div class="recent-products">
+          <h3>Recently Added Products</h3>
+          <div id="recent-products-list"></div>
+        </div>
+      </section>
+
+      <section id="add-product-section" class="admin-section">
+        <h2>Add New Product</h2>
+        <form id="add-product-form" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="product-name">Product Name</label>
+            <input type="text" id="product-name" name="name" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="product-description">Description</label>
+            <textarea id="product-description" name="description" required></textarea>
+          </div>
+          
+          <div class="form-group">
+            <label for="product-price">Price ($)</label>
+            <input type="number" id="product-price" name="price" step="0.01" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="product-quantity">Quantity</label>
+            <input type="number" id="product-quantity" name="quantity" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="edit-product-sent">Quantity Sent</label>
+            <input type="number" id="edit-product-sent" name="quantitySent" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="product-order-date">Order Date</label>
+            <input type="date" id="product-order-date" name="orderDate" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="product-arrival">Expected Arrival Date</label>
+            <input type="date" id="product-arrival" name="arrivalDate" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="edit-product-shipping">Shipping Date</label>
+            <input type="date" id="edit-product-shipping" name="shippingDate" required>
+          </div>
+
+          <div class="form-group">
+            <label for="product-status">Status</label>
+            <select id="product-status" name="status" required>
+              <option value="hold">Hold</option>
+              <option value="pending">Pending</option>
+              <option value="shipped">Shipped</option>
+              <option value="delivered">Delivered</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="sender-name">Sender Name</label>
+            <input type="text" id="sender-name" name="senderName" required>
+          </div>
+
+          <div class="form-group">
+            <label for="receiver-name">Receiver Name</label>
+            <input type="text" id="receiver-name" name="receiverName" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="product-photos">Product Photos (Select at least 2)</label>
+            <input type="file" id="product-photos" name="photos" multiple required accept="image/*">
+            <div class="photo-preview" id="photo-preview"></div>
+          </div>
+          
+          <button type="submit" class="btn btn-primary">Upload Product</button>
+        </form>
+      </section>
+
+      <section id="view-products-section" class="admin-section">
+        <h2>View All Products</h2>
+        <div class="admin-products-grid" id="admin-products-grid">
+          <div class="loading">Loading products...</div>
+        </div>
+      </section>
+
+      <section id="edit-product-section" class="admin-section">
+        <h2>Edit Product</h2>
+        <form id="edit-product-form" enctype="multipart/form-data">
+          <input type="hidden" id="edit-product-id" name="id">
+          
+          <div class="form-group">
+            <label for="edit-product-name">Product Name</label>
+            <input type="text" id="edit-product-name" name="name" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="edit-product-description">Description</label>
+            <textarea id="edit-product-description" name="description" required></textarea>
+          </div>
+          
+          <div class="form-group">
+            <label for="edit-product-price">Price ($)</label>
+            <input type="number" id="edit-product-price" name="price" step="0.01" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="edit-product-quantity">Quantity</label>
+            <input type="number" id="edit-product-quantity" name="quantity" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="edit-product-order-date">Order Date</label>
+            <input type="date" id="edit-product-order-date" name="orderDate" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="edit-product-arrival">Expected Arrival Date</label>
+            <input type="date" id="edit-product-arrival" name="arrivalDate" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="edit-product-shipping">Shipping Date</label>
+            <input type="date" id="edit-product-shipping" name="shippingDate" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="edit-product-sent">Quantity Sent</label>
+            <input type="number" id="edit-product-sent" name="quantitySent" required>
+          </div>
+
+          <div class="form-group">
+            <label for="edit-product-status">Status</label>
+            <select id="edit-product-status" name="status" required>
+              <option value="hold">Hold</option>
+              <option value="pending">Pending</option>
+              <option value="shipped">Shipped</option>
+              <option value="delivered">Delivered</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="edit-sender-name">Sender Name</label>
+            <input type="text" id="edit-sender-name" name="senderName" required>
+          </div>
+
+          <div class="form-group">
+            <label for="edit-receiver-name">Receiver Name</label>
+            <input type="text" id="edit-receiver-name" name="receiverName" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="edit-product-photos">Product Photos (Optional)</label>
+            <input type="file" id="edit-product-photos" name="photos" multiple accept="image/*">
+            <div class="current-photos" id="current-photos"></div>
+            <div class="photo-preview" id="edit-photo-preview"></div>
+          </div>
+          
+          <div class="form-buttons">
+            <button type="submit" class="btn btn-primary">Update Product</button>
+            <button type="button" id="delete-product-btn" class="btn btn-danger">Delete Product</button>
+          </div>
+        </form>
+      </section>
+
+      <section id="product-detail-section" class="admin-section">
+        <h2>Product Details</h2>
+        <div id="admin-product-detail"></div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-content">
+        <div class="company-info">
+          <h3>CBL Online Products</h3>
+          <p>Admin Dashboard</p>
+        </div>
+        <div class="footer-links">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#" id="dashboard-link-footer">Dashboard</a></li>
+            <li><a href="#" id="add-product-link-footer">Add Product</a></li>
+            <li><a href="#" id="view-products-link-footer">View Products</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="copyright">
+        <p>&copy; 2025 CBL Online Products. All rights reserved.</p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Modal -->
+  <div id="admin-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <div id="admin-modal-content"></div>
+    </div>
+  </div>
+
+  <script src="js/admin.js"></script>
+</body>
+</html>
+
