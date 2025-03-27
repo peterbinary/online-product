@@ -1,0 +1,22 @@
+{
+  "name": "emmy-tolls",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "multer": "^1.4.4",
+    "crypto-js": "^4.1.1",
+    "uuid": "^11.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  },
+  "author": "Demom-dev",
+  "license": "ISC",
+  "description": ""
+}
